@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ツカイキリ｜一人暮らしの「そろそろ買う」を教えてくれる</title>
+<meta name="description" content="一人暮らしの調味料・日用品を、買った日をひと登録するだけ。使い切るころに、そっと教えてくれるアプリ。" />
+<meta property="og:title" content="ツカイキリ｜切らさない、余らせない。" />
+<meta property="og:description" content="一人暮らしの消耗品を、買った日をひと登録するだけ。使い切るころに、そっと通知。" />
+<meta property="og:type" content="website" />
+<meta name="robots" content="index, follow" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root { color-scheme: light; }
+  body { font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif; }
+  .fade-up { animation: fadeUp .6s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px);} to { opacity:1; transform:none;} }
+</style>
+</head>
+<body class="bg-[#fbf7f0] text-stone-800">
+
+  <!-- Hero -->
+  <header class="max-w-3xl mx-auto px-5 pt-16 pb-12 text-center fade-up">
+    <p class="inline-block text-xs tracking-widest font-semibold text-amber-700 bg-amber-100 rounded-full px-3 py-1 mb-6">一人暮らし向け・開発中</p>
+    <h1 class="text-3xl sm:text-4xl font-bold leading-snug">切らさない、余らせない。</h1>
+    <p class="mt-4 text-stone-600 sm:text-lg leading-relaxed">
+      調味料も、日用品も、コンタクトも。<br class="hidden sm:block" />
+      買った日をひと登録するだけで、<strong class="text-stone-800">使い切るころにそっと教えてくれる</strong>アプリです。
+    </p>
+
+    <form id="waitlist" class="mt-8 flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+      <input id="email" type="email" required autocomplete="email" placeholder="メールアドレス"
+             class="flex-1 rounded-lg border border-stone-300 bg-white px-4 py-3 text-base outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200" />
+      <button type="submit" id="submitBtn"
+              class="rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold px-6 py-3 transition-colors disabled:opacity-50">
+        先行案内をうけとる
+      </button>
+    </form>
+    <p id="formMsg" class="mt-3 text-sm h-5" role="status" aria-live="polite"></p>
+    <p class="mt-1 text-xs text-stone-400">公開時のお知らせにだけ使います。第三者提供なし・いつでも配信停止できます。</p>
+  </header>
+
+  <!-- Pain -->
+  <section class="max-w-3xl mx-auto px-5 py-12">
+    <h2 class="text-xl font-bold text-center mb-8">こんなこと、ありませんか？</h2>
+    <ul class="grid sm:grid-cols-2 gap-4 text-stone-700">
+      <li class="bg-white rounded-xl p-5 border border-stone-200">醤油を切らして、買い物にもう一往復</li>
+      <li class="bg-white rounded-xl p-5 border border-stone-200">開封した香辛料、いつのか分からず結局処分</li>
+      <li class="bg-white rounded-xl p-5 border border-stone-200">トイレットペーパー最後の1ロールで焦る</li>
+      <li class="bg-white rounded-xl p-5 border border-stone-200">コンタクト・フィルター・電池の交換時期を忘れる</li>
+    </ul>
+  </section>
+
+  <!-- How -->
+  <section class="max-w-3xl mx-auto px-5 py-12">
+    <h2 class="text-xl font-bold text-center mb-8">ツカイキリのしくみ</h2>
+    <ol class="space-y-5">
+      <li class="flex gap-4 items-start bg-white rounded-xl p-5 border border-stone-200">
+        <span class="shrink-0 w-8 h-8 rounded-full bg-amber-600 text-white font-bold grid place-items-center">1</span>
+        <div><p class="font-semibold">買った物と開封日を登録（約3秒）</p><p class="text-sm text-stone-600 mt-1">品名を選んで日付をタップするだけ。持ち日数はよくある値が最初から入っています。</p></div>
+      </li>
+      <li class="flex gap-4 items-start bg-white rounded-xl p-5 border border-stone-200">
+        <span class="shrink-0 w-8 h-8 rounded-full bg-amber-600 text-white font-bold grid place-items-center">2</span>
+        <div><p class="font-semibold">使い切り予測日が自動で並ぶ</p><p class="text-sm text-stone-600 mt-1">近いものから一覧表示。今週買い足すべき物がひと目で分かります。</p></div>
+      </li>
+      <li class="flex gap-4 items-start bg-white rounded-xl p-5 border border-stone-200">
+        <span class="shrink-0 w-8 h-8 rounded-full bg-amber-600 text-white font-bold grid place-items-center">3</span>
+        <div><p class="font-semibold">近づいたら通知、「買った」でリセット</p><p class="text-sm text-stone-600 mt-1">買い直したらワンタップで次のサイクルへ。使うほど予測が自分の生活に合っていきます。</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- Diff -->
+  <section class="max-w-3xl mx-auto px-5 py-12">
+    <h2 class="text-xl font-bold text-center mb-6">在庫管理アプリと何が違う？</h2>
+    <div class="bg-white rounded-xl p-6 border border-stone-200 text-stone-700 leading-relaxed">
+      <p>家族の食材を何個も数えるためのものではありません。ツカイキリが答えるのは<strong class="text-stone-800">「1人分の&quot;そろそろ&quot;はいつか」</strong>だけ。個数管理も、レシート読み取りも、バーコードもありません。だから登録が続きます。</p>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="max-w-3xl mx-auto px-5 py-14 text-center">
+    <h2 class="text-2xl font-bold">公開したら、最初に知らせます</h2>
+    <p class="mt-3 text-stone-600">メールアドレスを登録しておくと、使えるようになった時に案内が届きます。</p>
+    <button onclick="document.getElementById('email').focus()"
+            class="mt-6 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold px-8 py-3 transition-colors">
+      ウェイトリストに登録
+    </button>
+  </section>
+
+  <footer class="max-w-3xl mx-auto px-5 py-10 text-center text-xs text-stone-400 border-t border-stone-200">
+    個人開発プロジェクト（開発者名義：Reo）
+  </footer>
+
+<!-- ============================================================
+     ウェイトリスト保存 : Google フォーム（アカウント作成・課金なし）
+       フォーム編集: https://docs.google.com/forms/d/1_Eh9lLREhFj_zpcrucHU32sggOos5liqppBFhlpH0Es/edit
+       種別 entry.1045432751  = "visit"(訪問) / "signup"(登録)
+       メール entry.1373306927
+     登録率 = signup件数 ÷ visit件数（回答スプレッドシートで集計）
+     ============================================================ -->
+<script>
+(function () {
+  var ENDPOINT = "https://docs.google.com/forms/d/e/1FAIpQLSfV0eFERqRH22DDsQ173D6yxoLQMahkVUCpY0VOYPcwEhTOMw/formResponse";
+  var F_TYPE = "entry.1045432751";
+  var F_EMAIL = "entry.1373306927";
+
+  function post(params) {
+    var body = new URLSearchParams();
+    Object.keys(params).forEach(function (k) { body.append(k, params[k]); });
+    return fetch(ENDPOINT, { method: "POST", mode: "no-cors", body: body });
+  }
+
+  // 訪問カウント（登録率の分母）。1セッション1回。
+  try {
+    if (!sessionStorage.getItem("tsk_v")) {
+      post({ [F_TYPE]: "visit" }).catch(function () {});
+      sessionStorage.setItem("tsk_v", "1");
+    }
+  } catch (e) {
+    post({ [F_TYPE]: "visit" }).catch(function () {});
+  }
+
+  var form = document.getElementById("waitlist");
+  var msg = document.getElementById("formMsg");
+  var btn = document.getElementById("submitBtn");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = document.getElementById("email").value.trim();
+    if (!email) return;
+    btn.disabled = true;
+    msg.className = "mt-3 text-sm h-5 text-stone-500";
+    msg.textContent = "送信中…";
+    post({ [F_TYPE]: "signup", [F_EMAIL]: email })
+      .then(function () {
+        form.reset();
+        msg.className = "mt-3 text-sm h-5 text-green-700";
+        msg.textContent = "登録ありがとうございます。公開時にご連絡します。";
+      })
+      .catch(function () {
+        msg.className = "mt-3 text-sm h-5 text-red-600";
+        msg.textContent = "送信に失敗しました。時間をおいて再度お試しください。";
+        btn.disabled = false;
+      });
+  });
+})();
+</script>
+</body>
+</html>
