@@ -36,16 +36,17 @@
       買った日をひと登録するだけで、<strong class="text-stone-800">使い切るころがひと目で分かる</strong>アプリです。
     </p>
 
-    <form id="waitlist" class="mt-8 flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
-      <input id="email" type="email" required autocomplete="email" placeholder="メールアドレス"
-             class="flex-1 rounded-lg border border-stone-300 bg-white px-4 py-3 text-base outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200" />
-      <button type="submit" id="submitBtn"
-              class="rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold px-6 py-3 transition-colors disabled:opacity-50">
-        先行案内をうけとる
-      </button>
-    </form>
-    <p id="formMsg" class="mt-3 text-sm h-5" role="status" aria-live="polite"></p>
-    <p class="mt-1 text-xs text-stone-400">公開時のお知らせにだけ使います。第三者提供なし・いつでも配信停止できます。</p>
+    <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center items-center">
+      <a href="https://tsukaikiri-khaki.vercel.app"
+         class="rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold px-8 py-3 transition-colors">
+        無料で使ってみる
+      </a>
+      <a href="https://note.com/reo775138/n/nac7e6fdac38a" target="_blank" rel="noopener"
+         class="text-sm text-stone-500 underline underline-offset-4 hover:text-stone-800">
+        作った経緯を読む（note）
+      </a>
+    </div>
+    <p class="mt-3 text-xs text-stone-400">Googleログインだけで始められます。3件までは無料、4件目からは買い切り500円です。</p>
   </header>
 
   <!-- Pain -->
@@ -88,71 +89,17 @@
 
   <!-- Final CTA -->
   <section class="max-w-3xl mx-auto px-5 py-14 text-center">
-    <h2 class="text-2xl font-bold">公開したら、最初に知らせます</h2>
-    <p class="mt-3 text-stone-600">メールアドレスを登録しておくと、使えるようになった時に案内が届きます。</p>
-    <button onclick="document.getElementById('email').focus()"
-            class="mt-6 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold px-8 py-3 transition-colors">
-      ウェイトリストに登録
-    </button>
+    <h2 class="text-2xl font-bold">もう使えます</h2>
+    <p class="mt-3 text-stone-600">まずは醤油とシャンプーあたりを3件、入れてみてください。無料で試せます。</p>
+    <a href="https://tsukaikiri-khaki.vercel.app"
+       class="mt-6 inline-block rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold px-8 py-3 transition-colors">
+      ツカイキリを開く
+    </a>
   </section>
 
   <footer class="max-w-3xl mx-auto px-5 py-10 text-center text-xs text-stone-400 border-t border-stone-200">
     個人開発プロジェクト（開発者名義：Reo）
   </footer>
 
-<!-- ============================================================
-     ウェイトリスト保存 : Google フォーム（アカウント作成・課金なし）
-       フォーム編集: https://docs.google.com/forms/d/1_Eh9lLREhFj_zpcrucHU32sggOos5liqppBFhlpH0Es/edit
-       種別 entry.1045432751  = "visit"(訪問) / "signup"(登録)
-       メール entry.1373306927
-     登録率 = signup件数 ÷ visit件数（回答スプレッドシートで集計）
-     ============================================================ -->
-<script>
-(function () {
-  var ENDPOINT = "https://docs.google.com/forms/d/e/1FAIpQLSfV0eFERqRH22DDsQ173D6yxoLQMahkVUCpY0VOYPcwEhTOMw/formResponse";
-  var F_TYPE = "entry.1045432751";
-  var F_EMAIL = "entry.1373306927";
-
-  function post(params) {
-    var body = new URLSearchParams();
-    Object.keys(params).forEach(function (k) { body.append(k, params[k]); });
-    return fetch(ENDPOINT, { method: "POST", mode: "no-cors", body: body });
-  }
-
-  // 訪問カウント（登録率の分母）。1セッション1回。
-  try {
-    if (!sessionStorage.getItem("tsk_v")) {
-      post({ [F_TYPE]: "visit" }).catch(function () {});
-      sessionStorage.setItem("tsk_v", "1");
-    }
-  } catch (e) {
-    post({ [F_TYPE]: "visit" }).catch(function () {});
-  }
-
-  var form = document.getElementById("waitlist");
-  var msg = document.getElementById("formMsg");
-  var btn = document.getElementById("submitBtn");
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var email = document.getElementById("email").value.trim();
-    if (!email) return;
-    btn.disabled = true;
-    msg.className = "mt-3 text-sm h-5 text-stone-500";
-    msg.textContent = "送信中…";
-    post({ [F_TYPE]: "signup", [F_EMAIL]: email })
-      .then(function () {
-        form.reset();
-        msg.className = "mt-3 text-sm h-5 text-green-700";
-        msg.textContent = "登録ありがとうございます。公開時にご連絡します。";
-      })
-      .catch(function () {
-        msg.className = "mt-3 text-sm h-5 text-red-600";
-        msg.textContent = "送信に失敗しました。時間をおいて再度お試しください。";
-        btn.disabled = false;
-      });
-  });
-})();
-</script>
 </body>
 </html>
